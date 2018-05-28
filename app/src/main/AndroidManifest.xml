@@ -98,11 +98,11 @@
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="j14sOjaPpsrGm4wW5KWDScdIRfyGcGj6"/>
+            android:value="VowY13klTvjDTZ4wkoFjwRCOOdFG1R2U"/>
 
         <meta-data
             android:name="Bmob_APP_KEY"
-            android:value="033db1894e6262436e0a8a1b2005305d"/>
+            android:value="30efacb14b9ef229423dffa570ee521d"/>
 
         <activity android:name=".activity.SplashActivity">
             <intent-filter>

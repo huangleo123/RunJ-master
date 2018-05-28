@@ -5,16 +5,16 @@ apply plugin: 'com.android.application'
 android {
     signingConfigs {
         config {
-            keyAlias 'debug'
+            keyAlias 'androiddebugkey'
             keyPassword 'android'
-            storeFile file('C:/Users/文涛/.android/debug.keystore')
+            storeFile file('C:/Users/dd/.android/debug.keystore')
             storePassword 'android'
         }
         release {
-            keyAlias 'rentalphang'
-
-            storeFile file('C:/Users/文涛/.android/rentalphang.jks')
-
+            keyAlias 'leo'
+            storeFile file('E:/android_github_project/RunJ-master/huanglihua.jks')
+            keyPassword 'a159753'
+            storePassword 'a159753'
         }
     }
     compileSdkVersion 22
@@ -82,8 +82,7 @@ dependencies {
     compile 'top.zibin:Luban:1.0.9'
     compile 'io.reactivex:rxandroid:1.2.1'
     compile 'io.reactivex:rxjava:1.1.6'
-/*    compile 'cn.lemon:RefreshRecyclerView:0.1.7'*/
-
+    /*    compile 'cn.lemon:RefreshRecyclerView:0.1.7'*/
 }
 
 task clean(type: Exec) {
