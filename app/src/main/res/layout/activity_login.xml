@@ -13,7 +13,7 @@
 
         <TextView
             style="@style/topbar_title"
-            android:text="欢迎使用嗨跑"/>
+            android:text="@string/login"/>
 
     </android.support.v7.widget.Toolbar>
 

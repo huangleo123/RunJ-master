@@ -46,7 +46,7 @@ public class SplashActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         user = BmobUser.getCurrentUser(context,User.class);
-        initComponent();
+        initComponent(); //初始化layout
         getIsFirstSplash();
 
         //判断是否为首次启动
@@ -153,7 +153,7 @@ public class SplashActivity extends BaseActivity {
     }
 
     /**
-     * 初始化组件
+     * 初始化组件 包括了次和非首次的layout
      */
     private void initComponent(){
         firstLayout = (RelativeLayout) findViewById(R.id.linear_splash_first);
@@ -163,7 +163,7 @@ public class SplashActivity extends BaseActivity {
     }
 
     /**
-     * 获取启动标示
+     * 获取启动标示 通过sp存储登陆信息
      */
     private void getIsFirstSplash(){
         SharedPreferences sharedPreferences = getSharedPreferences("config",MODE_PRIVATE);

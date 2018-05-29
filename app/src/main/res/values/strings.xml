@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">嗨跑</string>
+    <string name="app_name">中考体育通</string>
+    <string name="author">创新实验室 @黄利华</string>
+    <string name="login">登陆</string>
 </resources>
