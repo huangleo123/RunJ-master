@@ -276,7 +276,7 @@ public class RunFragment extends Fragment implements View.OnClickListener, Radar
                     startActivity(intent);
                     getActivity().overridePendingTransition(R.anim.anim_exit, R.anim.anim_enter);
                 }else {
-                    new com.rentalphang.runj.ui.AlertDialog(getActivity(), "GPS未开启", "为了正常记录你的运动数据，嗨跑需要你开启GPS定位功能。", true, "开启",0, new com.rentalphang.runj.ui.AlertDialog.OnDialogButtonClickListener() {
+                    new com.rentalphang.runj.ui.AlertDialog(getActivity(), "GPS未开启", "为了正常记录你的运动数据，需要你开启GPS定位功能。", true, "开启",0, new com.rentalphang.runj.ui.AlertDialog.OnDialogButtonClickListener() {
                         @Override
                         public void onDialogButtonClick(int requestCode, boolean isPositive) {
                             if (isPositive) {

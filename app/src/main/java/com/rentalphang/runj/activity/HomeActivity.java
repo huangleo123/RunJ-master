@@ -21,7 +21,7 @@ import java.util.List;
 import com.baidu.mapapi.SDKInitializer;
 import com.rentalphang.runj.R;
 import com.rentalphang.runj.fragment.CommunityFragment;
-import com.rentalphang.runj.fragment.DiscoverFragment;
+import com.rentalphang.runj.fragment.KnowFragment;
 import com.rentalphang.runj.fragment.MeFragment;
 import com.rentalphang.runj.fragment.MessageFragment;
 import com.rentalphang.runj.fragment.RunFragment;
@@ -49,27 +49,30 @@ public class HomeActivity extends FragmentActivity{
 
     private FragmentTabHost mTabHost;
     private List<Fragment> mFragmentList;
-    private Class mClass[] = {CommunityFragment.class,DiscoverFragment.class,RunFragment.class,MessageFragment.class,
+    private Class mClass[] = {KnowFragment.class,RunFragment.class,MessageFragment.class,
             MeFragment.class};
-    private Fragment mFragment[] = {new CommunityFragment(),new DiscoverFragment(),new RunFragment(),new MessageFragment()
+    /*private Fragment mFragment[] = {new CommunityFragment(),new DiscoverFragment(),new RunFragment(),new MessageFragment()
             ,new MeFragment(),
-            };
-    private String mTitles[] = {"社区","发现","跑步","消息","我"};
+    };*/
+    private Fragment mFragment[] = {new KnowFragment(),new RunFragment(),new MessageFragment(),new MeFragment(),
+    };
+
+
+   /* private String mTitles[] = {"社区","发现","跑步","消息","我"};*/
+    private String mTitles[] = {"资讯","跑步","签到","我"};
     private int mImages[] = {
-            R.drawable.tab_community_icon,
+            //R.drawable.tab_community_icon,
             R.drawable.tab_discover_icon,
             R.drawable.tab_run_icon,
             R.drawable.tab_message_icon,
             R.drawable.tab_me_icon
     };
     private int mLayout[] = {
-            R.layout.tab_item_community,
+           // R.layout.tab_item_community,
             R.layout.tab_item_discover,
             R.layout.tab_item_run,
             R.layout.tab_item_message,
             R.layout.tab_item_me};
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +96,8 @@ public class HomeActivity extends FragmentActivity{
 
     private void init() {
         initView();
-        mTabHost.setCurrentTab(2); //设置跑步为默认页
+        mTabHost.setCurrentTab(1); //设置跑步为默认页
+
 
     }
 
@@ -138,7 +142,8 @@ public class HomeActivity extends FragmentActivity{
         for (int i = 0;i < mFragment.length;i++){
             TabHost.TabSpec tabSpec = mTabHost.newTabSpec(mTitles[i]).setIndicator(getTabView(i));
             mTabHost.addTab(tabSpec,mClass[i],null);
-            mFragmentList.add(mFragment[i]);
+            Fragment textFragment = mFragment[i];
+            mFragmentList.add(textFragment);
             mTabHost.getTabWidget().getChildAt(i).setBackgroundColor(Color.WHITE);
         }
 

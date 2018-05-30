@@ -36,7 +36,7 @@
 
         <TextView
             style="@style/topbar_title"
-            android:text="嗨跑"
+            android:text="跑步"
             android:layout_centerHorizontal="true"/>
     </RelativeLayout>
 

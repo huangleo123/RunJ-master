@@ -46,10 +46,10 @@ import static android.R.attr.data;
 import static com.rentalphang.runj.R.id.sw_refresh;
 
 
-/**
+/**修改为展示资讯的fragment
  * Created by rentalphang on 2016/7/29.
  */
-public class DiscoverFragment extends Fragment implements RadarSearchListener, BDLocationListener {
+public class KnowFragment extends Fragment implements RadarSearchListener, BDLocationListener {
 
     private View mRootView;
     // 定位相关
