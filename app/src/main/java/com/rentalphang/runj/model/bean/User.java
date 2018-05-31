@@ -28,9 +28,45 @@ public class User extends BmobUser {
     private String headImgUrl;//头像网络url
 
     private float Height;//身高
+    private String student_ID;
+    private String facetoken;
+    private String truename;
+    private Boolean issign;
+
+    public Boolean getIssign() {
+        return issign;
+    }
+
+    public void setIssign(Boolean issign) {
+        this.issign = issign;
+    }
+
+    public String getTruename() {
+        return truename;
+    }
+
+    public void setTruename(String truename) {
+        this.truename = truename;
+    }
 
     public float getHeight() {
         return Height;
+    }
+
+    public String getStudent_ID() {
+        return student_ID;
+    }
+
+    public void setStudent_ID(String student_ID) {
+        this.student_ID = student_ID;
+    }
+
+    public String getFacetoken() {
+        return facetoken;
+    }
+
+    public void setFacetoken(String facetoken) {
+        this.facetoken = facetoken;
     }
 
     public void setHeight(float height) {

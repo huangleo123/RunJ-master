@@ -25,6 +25,7 @@ import com.rentalphang.runj.fragment.KnowFragment;
 import com.rentalphang.runj.fragment.MeFragment;
 import com.rentalphang.runj.fragment.MessageFragment;
 import com.rentalphang.runj.fragment.RunFragment;
+import com.rentalphang.runj.fragment.SignFragment;
 import com.rentalphang.runj.model.bean.User;
 
 import cn.bmob.newim.BmobIM;
@@ -49,12 +50,12 @@ public class HomeActivity extends FragmentActivity{
 
     private FragmentTabHost mTabHost;
     private List<Fragment> mFragmentList;
-    private Class mClass[] = {KnowFragment.class,RunFragment.class,MessageFragment.class,
+    private Class mClass[] = {KnowFragment.class,RunFragment.class,SignFragment.class,
             MeFragment.class};
     /*private Fragment mFragment[] = {new CommunityFragment(),new DiscoverFragment(),new RunFragment(),new MessageFragment()
             ,new MeFragment(),
     };*/
-    private Fragment mFragment[] = {new KnowFragment(),new RunFragment(),new MessageFragment(),new MeFragment(),
+    private Fragment mFragment[] = {new KnowFragment(),new RunFragment(),new SignFragment(),new MeFragment(),
     };
 
 
