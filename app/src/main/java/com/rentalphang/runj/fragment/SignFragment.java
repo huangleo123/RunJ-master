@@ -54,7 +54,7 @@ public class SignFragment extends Fragment implements View.OnClickListener{
     }
     private void whetherToShot(){
         if (user.getStudent_ID() == null){
-            //TODO 跳转到人脸识别中
+            //TODO 跳转到增加人脸中
         }
 
     }
