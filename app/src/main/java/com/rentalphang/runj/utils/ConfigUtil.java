@@ -53,5 +53,11 @@ public class ConfigUtil {
      */
     public static final String CITY_LIST_API = " https://api.heweather.com/x3/citylist?search=allchina" +
             "&key=a7ec86e719d9458da2e1f67ebc73d2e4";
+    /**
+     * 人脸识别的key 和SECRET
+     */
+    public static final String FACE_KEY = "qro07AXmWi8KjcFuLI1IcMhzK5U-1iUm";
+
+    public static final String FACE_SECRET ="a9Hw0-KoNR2xxqoZeLhpyS3-GJCf3Wgc";
 
 }

@@ -547,7 +547,7 @@ public class PublishDynamicActivity extends BaseActivity implements View.OnClick
         popupWindow.setOutsideTouchable(true);
 
         popupRelative = (RelativeLayout) view.findViewById(R.id.popup_relative);
-        photoText = (TextView) view.findViewById(R.id.popup_photo);
+       // photoText = (TextView) view.findViewById(R.id.popup_photo);
         cameraText = (TextView) view.findViewById(R.id.popup_camera);
         cancelText = (TextView) view.findViewById(R.id.popup_cancel);
 
@@ -577,7 +577,7 @@ public class PublishDynamicActivity extends BaseActivity implements View.OnClick
                 popupWindow.dismiss();
                 break;
 
-            case R.id.popup_photo:
+           /* case R.id.popup_photo:
                 if (GeneralUtil.isSDCard()) {
                     Intent intent = new Intent(this, AlbumActivity.class);
                     startActivityForResult(intent, GET_PHOTO_REQUEST);
@@ -586,7 +586,7 @@ public class PublishDynamicActivity extends BaseActivity implements View.OnClick
                     Toast.makeText(context, "没有检测到SD卡", Toast.LENGTH_SHORT).show();
                 }
                 popupWindow.dismiss();
-                break;
+                break;*/
 
             case R.id.popup_cancel:
                 popupWindow.dismiss();

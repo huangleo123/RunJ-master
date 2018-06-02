@@ -17,6 +17,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.display.CircleBitmapDisplayer;
 import com.rentalphang.runj.R;
+import com.rentalphang.runj.activity.AddFaceActivity;
 import com.rentalphang.runj.activity.ModifyWHeightActivity;
 import com.rentalphang.runj.activity.PersonProfileActivity;
 import com.rentalphang.runj.activity.RegisterActivity;
@@ -49,6 +50,8 @@ public class MeFragment extends Fragment implements View.OnClickListener {
     private RelativeLayout rlRunRecord;
     private RelativeLayout rlAlterInfo;
     private RelativeLayout rlAlterWeiHeightInfo;
+    private RelativeLayout rlAddFace;
+
     private User user;
     private DisplayImageOptions circleOptions;
     private double totalDistance;//总里程
@@ -82,7 +85,7 @@ public class MeFragment extends Fragment implements View.OnClickListener {
         rlRunRecord = (RelativeLayout) mRootView.findViewById(R.id.rl_runrecord);
         rlAlterInfo = (RelativeLayout) mRootView.findViewById(R.id.rl_alter_info);
         rlAlterWeiHeightInfo = (RelativeLayout) mRootView.findViewById(R.id.rl_alter_weheight_info);
-
+        rlAddFace= (RelativeLayout) mRootView.findViewById(R.id.rl_add_face);
 
         mDiscView.setOnClickListener(this);
         ivMeIcon.setOnClickListener(this);
@@ -90,6 +93,7 @@ public class MeFragment extends Fragment implements View.OnClickListener {
         rlRunRecord.setOnClickListener(this);
         rlAlterInfo.setOnClickListener(this);
         rlAlterWeiHeightInfo.setOnClickListener(this);
+        rlAddFace.setOnClickListener(this);
 
 
         circleOptions = new DisplayImageOptions.Builder()
@@ -139,6 +143,10 @@ public class MeFragment extends Fragment implements View.OnClickListener {
             case R.id.rl_runrecord://跑步记录
                 Intent runRecordIntent = new Intent(getActivity(), RunRecordActivity.class);
                 startActivity(runRecordIntent);
+                break;
+            case R.id.rl_add_face://添加人脸识别
+                Intent addFaceIntent = new Intent(getActivity(), AddFaceActivity.class);
+                startActivity(addFaceIntent);
                 break;
 
             case R.id.rl_alter_info://修改信息

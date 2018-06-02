@@ -31,6 +31,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.megvii.cloud.http.CommonOperate;
+import com.megvii.cloud.http.FaceSetOperate;
+import com.megvii.cloud.http.Response;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.display.CircleBitmapDisplayer;
@@ -39,14 +42,32 @@ import com.rentalphang.runj.R;
 import com.rentalphang.runj.model.bean.Timeline;
 import com.rentalphang.runj.model.bean.User;
 import com.rentalphang.runj.model.biz.ActivityManager;
+import com.rentalphang.runj.utils.ConfigUtil;
 import com.rentalphang.runj.utils.FileUtils;
 import com.rentalphang.runj.utils.GeneralUtil;
 import com.rentalphang.runj.utils.ToastUtil;
+import com.rentalphang.runj.utils.UploadImageTool;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Random;
+
+import javax.net.ssl.SSLException;
 
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobDate;
@@ -95,20 +116,25 @@ public class RegisterUserActivity extends BaseActivity implements View.OnClickLi
     private LinearLayout llRegister2;
     private TextView photoText, cameraText, cancelText;
 
+    private EditText student_ID_et;
+
+
 
     private String birthdayStr = null; //选择的生日拼接字符串
 
     private String userName = null; //用户名
     private String nickName = null; //昵称
+    private String truename = null;
     private Date birthday = null; //生日
     private Integer age = 0; //年龄
     private boolean sex = true; //性别,默认男
-
+    private String student_ID = null;
     private String picPath = null; //头像路径
 
     private String headImgUrl = null; //头像存储在Bmob上的url
 
     private User user; //用户
+
 
 
     private DisplayImageOptions circleOptions;
@@ -176,6 +202,7 @@ public class RegisterUserActivity extends BaseActivity implements View.OnClickLi
         femaleRadioBtn = (RadioButton) findViewById(R.id.radio_sex_female);
         registerBtn = (Button) findViewById(R.id.bt_modify_submit);
         llRegister1 = (LinearLayout) findViewById(R.id.ll_registeruser1);
+        student_ID_et = (EditText) findViewById(R.id.et_register_studentID);
 
 
         this.circleOptions = new DisplayImageOptions.Builder()
@@ -215,7 +242,7 @@ public class RegisterUserActivity extends BaseActivity implements View.OnClickLi
                 }
             }
         });
-
+        //TODO 一个新的内容改变监听器
         nicknameEdt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -230,9 +257,26 @@ public class RegisterUserActivity extends BaseActivity implements View.OnClickLi
             @Override
             public void afterTextChanged(Editable s) {
 
-                nickName = nicknameEdt.getText().toString();
+                truename = nicknameEdt.getText().toString();
             }
         });
+        student_ID_et.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                student_ID = student_ID_et.getText().toString();
+            }
+        });
+
     }
 
     /***
@@ -270,24 +314,45 @@ public class RegisterUserActivity extends BaseActivity implements View.OnClickLi
                 break;
             case R.id.bt_modify_submit:
 
-                if (TextUtils.isEmpty(nickName)) {
-                    Toast.makeText(context, "昵称不能为空！", Toast.LENGTH_SHORT).show();
+                if (TextUtils.isEmpty(truename)) {
+                    Toast.makeText(context, "姓名不能为空！", Toast.LENGTH_SHORT).show();
                 } else {
                     if (picPath != null) {
                         //上传头像，注册用户
                         showProgressDialog(this, "正在提交修改...");
                         uploadImage();
+
+
+                    } else {
+                        //无头像，注册用户
+                        showProgressDialog(this, "正在提交修改...");
+                        updateInfo();
+                    }
+
+                }
+                if (TextUtils.isEmpty(student_ID)){
+                    Toast.makeText(context, "学号不能为空！", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    if (picPath != null) {
+                        //上传头像，注册用户
+                        showProgressDialog(this, "正在提交修改...");
+                        uploadImage();
+
+                        //uploadToFace();//上传图片到face++；
                     } else {
                         //无头像，注册用户
                         showProgressDialog(this, "正在提交修改...");
                         updateInfo();
                     }
                 }
+
                 break;
 
             case R.id.popup_camera:
                 popupWindow.dismiss();
                 if (GeneralUtil.isSDCard()) {
+                    ///////////////////////拍照//////////////////////////
                     Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     if (cameraIntent.resolveActivity(getPackageManager()) != null) {
                         //判断系统是否有能处理cameraIntent的activity
@@ -418,7 +483,8 @@ public class RegisterUserActivity extends BaseActivity implements View.OnClickLi
     private void updateInfo() {
 
         User xUser = new User();
-        xUser.setNickName(nickName);
+        xUser.setNickName(truename);
+        xUser.setStudent_ID(student_ID);
         xUser.setSex(sex);
         xUser.setHeadImgPath(picPath);
         xUser.setHeadImgUrl(headImgUrl);
@@ -441,7 +507,13 @@ public class RegisterUserActivity extends BaseActivity implements View.OnClickLi
 
     }
 
-
+  /*  *//**
+     * 上传到face++,获得face Token
+     *//*
+    private void uploadToFace(){
+        UploadImageTool upTool = new UploadImageTool(picPath);
+        upTool.uploadImageToFace();
+    }*/
     /**
      * 上传图片
      */
@@ -466,6 +538,7 @@ public class RegisterUserActivity extends BaseActivity implements View.OnClickLi
             }
         });
     }
+
 
 
     /**
@@ -503,4 +576,5 @@ public class RegisterUserActivity extends BaseActivity implements View.OnClickLi
         }).show();
 
     }
+
 }

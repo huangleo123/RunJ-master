@@ -124,6 +124,7 @@
         <activity android:name=".activity.PersonProfileActivity"/>
         <activity android:name=".activity.FriendActivity"/>
         <activity android:name=".activity.AlbumActivity"/>
+        <activity android:name=".activity.AddFaceActivity"/>
         <activity android:name=".activity.PublishDynamicActivity"/>
         <activity android:name=".activity.DynamicDetailsActivity"/>
         <activity android:name=".activity.GalleryActivity"/>
@@ -131,6 +132,7 @@
         <activity android:name=".activity.AboutAppActivity"/>
         <activity android:name=".activity.SearchUserActivity"/>
         <activity android:name=".activity.ModifyWHeightActivity"/>
+        <activity android:name=".activity.FaceSignActivity"/>
         <activity
             android:name="me.iwf.photopicker.PhotoPickerActivity"
             android:theme="@style/customTheme"
